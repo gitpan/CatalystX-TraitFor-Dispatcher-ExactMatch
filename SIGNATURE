@@ -14,10 +14,10 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 4046b6205b834acca5db6352dd400de619cfac2f Changes
+SHA1 09c15d7fd8ac53b2014a2ee4d77035930f2c5b12 Changes
 SHA1 f3296a09eb07898f3ba6dd0ece615dafc1b57e16 LICENSE
 SHA1 7ca05588367c327cb71baa07f1345d41b03de684 MANIFEST
-SHA1 37a947f22c4f8073d5fc985a80af7a6478606bec META.yml
+SHA1 ff4786118a56cfa07c3c403fe2fa682c0d246661 META.yml
 SHA1 7150e5e086ef493e1e527a1eeec44a8344b80db6 Makefile.PL
 SHA1 2f3c0ea3365c121f1e7571d0f563246ea8f11970 README
 SHA1 5d94bc10deff1dd74e4bc5dfa6fc015e39271f15 inc/Module/AutoInstall.pm
@@ -39,15 +39,15 @@ SHA1 4db02ca3854a0d95bf38139e9b714cc85b618189 inc/Module/Package/Dist/RDF.pm
 SHA1 775bd24f2fdbb6dce51a8b5b0cdb01fccfce83c4 inc/Scalar/Util.pm
 SHA1 b1b664983568bf822c327599eb88e223483ae96a inc/Scalar/Util/PP.pm
 SHA1 eef6bff62046bff2ce08ba132d0b58fba30f40b4 inc/YAML/Tiny.pm
-SHA1 d4879fb561dfb431c0485f978089a8ca2db12ddf lib/CatalystX/TraitFor/Dispatcher/ExactMatch.pm
-SHA1 a2052589474c09b5f06d4bb11fd1bdcd075bd9e9 meta/changes.ttl
+SHA1 b87a7d8c96bd8057fd7c63ed5dd85f2b8f42fc08 lib/CatalystX/TraitFor/Dispatcher/ExactMatch.pm
+SHA1 57667062da62947434c0aca12f0663a5007ba6c0 meta/changes.ttl
 SHA1 0d998f6204e5efb026739f4b13249d4a837a0658 meta/doap.ttl
 SHA1 bddb36b1dea46d5a48707efb57d8b17489c7d176 meta/makefile.ttl
 SHA1 837da73dabb550821693d4572291e092a7e29f1d t/01basic.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEARECAAYFAk7A9gIACgkQzr+BKGoqfTnGIACeMJcIHVaDqupIMeVI5w9/1Hnd
-z4MAnixBIdifVtXozTnSXIpO8u6ytKdj
-=6y8p
+iEYEARECAAYFAk7Dz0wACgkQzr+BKGoqfTlJJQCgoCnGa5CHr3XHqqtazvmfJixp
+0vEAn2brbfe+RPKcHlHokitaZ6jPxeW7
+=hj74
 -----END PGP SIGNATURE-----
