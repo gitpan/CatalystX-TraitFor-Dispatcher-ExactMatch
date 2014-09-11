@@ -1,43 +1,45 @@
-package CatalystX::TraitFor::Dispatcher::ExactMatch; # for CPAN
-
 use 5.010;
 use strict;
-use MooseX::Declare;
+use warnings;
+
+package CatalystX::TraitFor::Dispatcher::ExactMatch;
+
+use Moose::Role;
 
 BEGIN
 {
 	$CatalystX::TraitFor::Dispatcher::ExactMatch::AUTHORITY = 'cpan:TOBYINK';
-	$CatalystX::TraitFor::Dispatcher::ExactMatch::VERSION   = '0.002';
+	$CatalystX::TraitFor::Dispatcher::ExactMatch::VERSION   = '0.003';
 }
 
-role CatalystX::TraitFor::Dispatcher::ExactMatch
+requires qw( dispatch_types );
+
+around prepare_action => sub
 {
-	around prepare_action ($ctx, @etc)
-	{		
-		my $req = $ctx->req;
-		(my $path = $req->path) =~ s{^/+}{};
-		
-		my $matched = 0;
-		foreach my $type ( @{ $self->dispatch_types } )
+	my $next = shift;
+	my $self = shift;
+	my ($ctx, @etc) = @_;
+	
+	my $req = $ctx->req;
+	(my $path = $req->path) =~ s{^/+}{};
+	
+	my $matched = 0;
+	foreach my $type ( @{ $self->dispatch_types } )
+	{
+		if (!$matched and $type->match($ctx, $path))
 		{
-			if (!$matched and $type->match($ctx, $path))
-			{
-				$matched++;
-			}
-		}
-		
-		if ($matched)
-		{
-			$ctx->log->debug(sprintf('Got exact match "%s"', $req->match));
-			s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg foreach grep { defined } @{$req->captures||[]};
-		}
-		else
-		{
-			return $self->$orig($ctx, @etc);
+			$matched++;
 		}
 	}
 	
-}
+	if ($matched)
+	{
+		$ctx->log->debug(sprintf('Got exact match "%s"', $req->match));
+		s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg foreach grep { defined } @{$req->captures||[]};
+	}
+	
+	$self->$next($ctx, @etc);
+};
 
 'fixed';
 
@@ -49,18 +51,18 @@ CatalystX::TraitFor::Dispatcher::ExactMatch - handle trailing slashes properly
 
 =head1 SYNOPSIS
 
-	package MyApp;
-
-	use Catalyst::Runtime 5.80;
-	use Catalyst qw/
-		-Debug
-		Static::Simple
-		/;
-	use CatalystX::RoleApplicator;
-
-	__PACKAGE__->apply_dispatcher_class_roles(
-		qw/CatalystX::TraitFor::Dispatcher::ExactMatch/
-		);
+   package MyApp;
+   
+   use Catalyst::Runtime 5.80;
+   use Catalyst qw/
+      -Debug
+      Static::Simple
+      /;
+   use CatalystX::RoleApplicator;
+   
+   __PACKAGE__->apply_dispatcher_class_roles(
+      qw/CatalystX::TraitFor::Dispatcher::ExactMatch/
+   );
 
 =head1 DESCRIPTION
 
@@ -102,7 +104,7 @@ Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
 =head1 COPYRIGHT AND LICENCE
 
-This software is copyright (c) 2011 by Toby Inkster.
+This software is copyright (c) 2011, 2014 by Toby Inkster.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
